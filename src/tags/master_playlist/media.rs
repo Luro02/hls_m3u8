@@ -238,9 +238,7 @@ impl ExtXMediaBuilder {
             ).to_string());
         }
 
-        if self.is_default.unwrap_or(false)
-            && self.is_autoselect.is_some()
-            && !self.is_autoselect.unwrap()
+        if self.is_default.unwrap_or(false) && self.is_autoselect.map_or(false, |b| !b)
         {
             return Err(Error::custom(format!(
                 "If `DEFAULT` is true, `AUTOSELECT` has to be true too, if present. Default: {:?}, Autoselect: {:?}!",
